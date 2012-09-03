@@ -32,6 +32,5 @@ pip-log.txt
 
 .idea/inspectionProfiles/Project_Default.xml
 
-pyheatmap/out.png
+pyheatmap/*.png
 
-*.png

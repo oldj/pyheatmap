@@ -202,6 +202,5 @@ def test():
     hm.heatmap(save_as="heat.png")
 
 
-
 if __name__ == "__main__":
     test()
