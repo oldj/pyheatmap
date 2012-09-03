@@ -45,8 +45,36 @@ class HeatMap(object):
             self.__im = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
 
 
-    def clickmap(self, save_as, color="#ff0000"):
+    def __paintHit(self, x, y, color):
         u""""""
+
+        im = self.__im
+        width, height = self.width, self.height
+        im.putpixel((x, y), color)
+
+        for i in (1, 2):
+            pos = (
+                (x + i, y + i),
+                (x + i, y - i),
+                (x - i, y + i),
+                (x - i, y - i),
+            )
+            for ix, iy in pos:
+                if ix >= 0 and iy >= 0 and ix < width and iy < height:
+                    im.putpixel((ix, iy), color)
+
+
+    def clickmap(self, save_as, color=(255, 0, 0, 255)):
+        u""""""
+
+        for hit in self.data:
+            x, y = hit[0], hit[1]
+            if x < 0 or x >= self.width or y < 0 or y >= self.height:
+                continue
+
+            self.__paintHit(x, y, color)
+
+
         self.save_as = save_as
         self.__save()
 

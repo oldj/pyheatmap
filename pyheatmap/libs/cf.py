@@ -10,9 +10,9 @@ def getMaxSize(data):
     max_w = 0
     max_h = 0
 
-    for item in data:
-        w = item[0]
-        h = item[1]
+    for hit in data:
+        w = hit[0]
+        h = hit[1]
         if w > max_w:
             max_w = w
         if h > max_h:
