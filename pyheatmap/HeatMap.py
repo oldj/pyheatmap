@@ -5,6 +5,12 @@
 # email: oldj.wu@gmail.com
 #
 
+u"""
+pyHeatMap
+@link https://github.com/oldj/pyheatmap
+
+"""
+
 
 import os
 import Image
@@ -40,6 +46,7 @@ class HeatMap(object):
 
 
     def __mkImg(self):
+        u"""生成临时图片"""
 
         if self.base:
             self.__im = Image.open(self.base)
@@ -50,7 +57,7 @@ class HeatMap(object):
 
 
     def __paintHit(self, x, y, color):
-        u""""""
+        u"""绘制点击小叉图片"""
 
         im = self.__im
         width, height = self.width, self.height
@@ -69,7 +76,7 @@ class HeatMap(object):
 
 
     def clickmap(self, save_as, color=(255, 0, 0, 255)):
-        u""""""
+        u"""绘制点击图片"""
 
         self.__mkImg()
 
@@ -132,7 +139,7 @@ class HeatMap(object):
 
 
     def heatmap(self, save_as):
-        u""""""
+        u"""绘制热图"""
 
         self.__mkImg()
 
@@ -165,21 +172,21 @@ class HeatMap(object):
 
 
 def test():
-    u""""""
+    u"""测试方法"""
 
     import random
 
     width = 400
     height = 300
-    r = 50
-    data = []
 
+    # 随机生成测试数据
+    data = []
+    r = 50
     for i in range(4):
         data.append([
             random.randint(0, width - 1),
             random.randint(0, height - 1),
         ])
-
     for i in xrange(12):
         data2 = []
         for x, y in data:
@@ -187,8 +194,9 @@ def test():
             y2 = y + random.randint(-r, r)
             data2.append([x2, y2])
         data.extend(data2)
-
     print(len(data))
+
+    # 开始绘制
     hm = HeatMap(data)
     hm.clickmap(save_as="hit.png")
     hm.heatmap(save_as="heat.png")
