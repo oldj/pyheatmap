@@ -163,15 +163,24 @@ def test():
 
     width = 400
     height = 300
+    r = 50
     data = []
-    count = 10000
 
-    for i in xrange(count):
+    for i in range(4):
         data.append([
             random.randint(0, width - 1),
             random.randint(0, height - 1),
         ])
 
+    for i in xrange(12):
+        data2 = []
+        for x, y in data:
+            x2 = x + random.randint(-r, r)
+            y2 = y + random.randint(-r, r)
+            data2.append([x2, y2])
+        data.extend(data2)
+
+    print(len(data))
     hm = HeatMap(data)
 #    hm.clickmap(save_as="hit.png")
     hm.heatmap(save_as="heat.png")
