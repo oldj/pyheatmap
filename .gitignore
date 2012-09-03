@@ -28,3 +28,8 @@ pip-log.txt
 
 .idea
 .iml
+.png
+
+.idea/inspectionProfiles/Project_Default.xml
+
+pyheatmap/out.png
