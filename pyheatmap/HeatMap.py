@@ -8,6 +8,7 @@
 
 import os
 import Image
+import ImageDraw2
 from libs import cf
 
 
@@ -79,8 +80,67 @@ class HeatMap(object):
         self.__save()
 
 
+    def __heat(self, heat_data, x, y, template):
+        u""""""
+
+        l = len(heat_data)
+        width = self.width
+        p = width * y + x
+
+        for ip, iv in template:
+            p2 = p + ip
+            if 0 <= p2 < l:
+                heat_data[p2] += iv
+
+
+    def __paintHeat(self, heat_data, colors):
+        u""""""
+
+        import re
+
+        im = self.__im
+        rr = re.compile(", (\d+)%\)")
+        dr = ImageDraw2.ImageDraw.Draw(im)
+        width = self.width
+        height = self.height
+
+        max_v = max(heat_data)
+        if max_v <= 0:
+            # 空图片
+            return
+
+        r = 240.0 / max_v
+        heat_data2 = [int(i * r) - 1 for i in heat_data]
+
+        size = width * height
+        for p in xrange(size):
+            v = heat_data2[p]
+            if v > 0:
+                x, y = p % width, p // width
+                color = colors[v]
+                alpha = int(rr.findall(color)[0])
+                if alpha > 50:
+                    al = 255 - 255 * (alpha - 50) / 50
+                    im.putpixel((x, y), (0, 0, 255, al))
+                else:
+                    dr.point((x, y), fill=color)
+
+
     def heatmap(self, save_as):
         u""""""
+
+        circle = cf.mkCircle(10, self.width)
+        heat_data = [0] * self.width * self.height
+
+        for hit in self.data:
+            x, y = hit[0], hit[1]
+            if x < 0 or x >= self.width or y < 0 or y >= self.height:
+                continue
+
+            self.__heat(heat_data, x, y, circle)
+
+        self.__paintHeat(heat_data, cf.mkColors())
+
         self.save_as = save_as
         self.__save()
 
@@ -113,7 +173,8 @@ def test():
         ])
 
     hm = HeatMap(data)
-    hm.clickmap(save_as="out.png")
+#    hm.clickmap(save_as="hit.png")
+    hm.heatmap(save_as="heat.png")
 
 
 
