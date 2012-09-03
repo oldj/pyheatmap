@@ -38,6 +38,9 @@ class HeatMap(object):
             self.width = self.width or w
             self.height = self.height or h
 
+
+    def __mkImg(self):
+
         if self.base:
             self.__im = Image.open(self.base)
             self.width, self.height = self.__im.size()
@@ -61,12 +64,14 @@ class HeatMap(object):
                 (x - i, y - i),
             )
             for ix, iy in pos:
-                if ix >= 0 and iy >= 0 and ix < width and iy < height:
+                if 0 <= ix < width and 0 <= iy < height:
                     im.putpixel((ix, iy), color)
 
 
     def clickmap(self, save_as, color=(255, 0, 0, 255)):
         u""""""
+
+        self.__mkImg()
 
         for hit in self.data:
             x, y = hit[0], hit[1]
@@ -129,6 +134,8 @@ class HeatMap(object):
     def heatmap(self, save_as):
         u""""""
 
+        self.__mkImg()
+
         circle = cf.mkCircle(10, self.width)
         heat_data = [0] * self.width * self.height
 
@@ -153,6 +160,7 @@ class HeatMap(object):
             os.makedirs(folder)
 
         self.__im.save(save_as)
+        self.__im = None
 
 
 
@@ -182,7 +190,7 @@ def test():
 
     print(len(data))
     hm = HeatMap(data)
-#    hm.clickmap(save_as="hit.png")
+    hm.clickmap(save_as="hit.png")
     hm.heatmap(save_as="heat.png")
 
 
