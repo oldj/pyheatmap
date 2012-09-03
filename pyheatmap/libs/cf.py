@@ -11,8 +11,8 @@ def getMaxSize(data):
     max_h = 0
 
     for item in data:
-        w = data[0]
-        h = data[1]
+        w = item[0]
+        h = item[1]
         if w > max_w:
             max_w = w
         if h > max_h:
