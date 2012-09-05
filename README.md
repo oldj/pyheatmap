@@ -26,6 +26,17 @@ pyHeatMap
  安装：
 ----------
 
+通过 pip 安装：
+
+    pip install pyheatmap
+
+通过 easy_install 安装：
+
+    easy_install pyheatmap
+
+
+通过源码安装：
+
     git clone git://github.com/oldj/pyheatmap.git
     cd pyheatmap
     python setup.py install
@@ -34,8 +45,8 @@ pyHeatMap
  使用：
 ----------
 
-    import pyheatmap
-    pyheatmap.test() # run test
+    from pyheatmap import heatmap
+    heatmap.test() # run test
 
 
  版权及致谢：

@@ -5,3 +5,4 @@
 # email: oldj.wu@gmail.com
 #
 
+__version__ = "0.1"
