@@ -33,4 +33,7 @@ pip-log.txt
 .idea/inspectionProfiles/Project_Default.xml
 
 pyheatmap/*.png
+pyheatmap/build
+pyheatmap/env
 
+*.iml

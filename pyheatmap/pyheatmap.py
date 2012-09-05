@@ -15,8 +15,9 @@ pyHeatMap
 import os
 import Image
 import ImageDraw2
-from libs import cf
+from inc import cf
 
+VERSION = __import__("__init__").__version__
 
 class HeatMap(object):
 
