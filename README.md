@@ -23,6 +23,21 @@ pyHeatMap
 热图
 
 
+ 安装：
+----------
+
+    git clone git://github.com/oldj/pyheatmap.git
+    cd pyheatmap
+    python setup.py install
+
+
+ 使用：
+----------
+
+    import pyheatmap
+    pyheatmap.test() # run test
+
+
  更新历史：
 ----------
 
