@@ -17,8 +17,6 @@ import Image
 import ImageDraw2
 from inc import cf
 
-VERSION = __import__("__init__").__version__
-
 class HeatMap(object):
 
     def __init__(self,

@@ -35,5 +35,8 @@ pip-log.txt
 pyheatmap/*.png
 pyheatmap/build
 pyheatmap/env
+pyheatmap/dist
 
 *.iml
+
+pyheatmap/MANIFEST
