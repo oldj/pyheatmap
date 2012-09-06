@@ -173,32 +173,24 @@ class HeatMap(object):
 def test():
     u"""测试方法"""
 
-    import random
-
-    width = 400
-    height = 300
-
-    # 随机生成测试数据
+    print("load data..")
     data = []
-    r = 50
-    for i in range(4):
-        data.append([
-            random.randint(0, width - 1),
-            random.randint(0, height - 1),
-        ])
-    for i in xrange(12):
-        data2 = []
-        for x, y in data:
-            x2 = x + random.randint(-r, r)
-            y2 = y + random.randint(-r, r)
-            data2.append([x2, y2])
-        data.extend(data2)
-    print(len(data))
+    f = open("../examples/test_data.txt")
+    for ln in f:
+        a = ln.split(",")
+        if len(a) != 2:
+            continue
+        x, y = int(a[0]), int(a[1])
+        data.append([x, y])
+    f.close()
 
+    print("painting..")
     # 开始绘制
     hm = HeatMap(data)
     hm.clickmap(save_as="hit.png")
     hm.heatmap(save_as="heat.png")
+
+    print("done.")
 
 
 if __name__ == "__main__":
