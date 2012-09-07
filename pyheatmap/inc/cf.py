@@ -21,9 +21,11 @@ def getMaxSize(data):
 
 
 def mkCircle(r, w):
-    u"""根据半径r以及图片宽度 w ，产生一个圆的list"""
+    u"""根据半径r以及图片宽度 w ，产生一个圆的list
+    @see http://oldj.net/article/bresenham-algorithm/
+    """
 
-    #	__clist = set()
+    #__clist = set()
     __tmp = {}
 
     def c8(ix, iy, v=1):
@@ -41,7 +43,7 @@ def mkCircle(r, w):
         for x2, y2 in ps:
             p = w * y2 + x2
             __tmp.setdefault(p, v)
-            #				__clist.add((p, v))
+            #__clist.add((p, v))
 
     # 中点圆画法
     x = 0
@@ -57,13 +59,17 @@ def mkCircle(r, w):
             y -= 1
         x += 1
 
-    #	__clist = __tmp.items()
+    #__clist = __tmp.items()
 
     return __tmp.items()
 
 
 def mkColors(n=240):
-    u"""生成色盘"""
+    u"""生成色盘
+    @see http://oldj.net/article/heat-map-colors/
+
+    TODO: 根据 http://oldj.net/article/hsl-to-rgb/ 将 HSL 转为 RGBA
+    """
 
     colors = []
     n1 = int(n * 0.4)
@@ -71,7 +77,7 @@ def mkColors(n=240):
 
     for i in range(n1):
         color = "hsl(240, 100%%, %d%%)" % (100 * (n1 - i / 2) / n1)
-        #			color = 255 * i / n1
+        #color = 255 * i / n1
         colors.append(color)
     for i in range(n2):
         color = "hsl(%.0f, 100%%, 50%%)" % (240 * (1.0 - float(i) / n2))
