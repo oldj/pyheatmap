@@ -42,3 +42,6 @@ pyheatmap/dist
 pyheatmap/MANIFEST
 
 MANIFEST
+
+.DS_Store
+examples/env
