@@ -44,12 +44,14 @@ class HeatMap(object):
             self.height = self.height or h
 
 
-    def __mkImg(self):
+    def __mkImg(self, base=None):
         u"""生成临时图片"""
 
-        if self.base:
-            self.__im = Image.open(self.base)
-            self.width, self.height = self.__im.size()
+        base = base or self.base
+
+        if base:
+            self.__im = Image.open(base) if type(base) in (str, unicode) else base
+            self.width, self.height = self.__im.size
 
         else:
             self.__im = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
@@ -74,10 +76,10 @@ class HeatMap(object):
                     im.putpixel((ix, iy), color)
 
 
-    def clickmap(self, save_as, color=(255, 0, 0, 255)):
+    def clickmap(self, save_as=None, base=None, color=(255, 0, 0, 255)):
         u"""绘制点击图片"""
 
-        self.__mkImg()
+        self.__mkImg(base)
 
         for hit in self.data:
             x, y = hit[0], hit[1]
@@ -87,8 +89,11 @@ class HeatMap(object):
             self.__paintHit(x, y, color)
 
 
-        self.save_as = save_as
-        self.__save()
+        if save_as:
+            self.save_as = save_as
+            self.__save()
+
+        return self.__im
 
 
     def __heat(self, heat_data, x, y, template):
@@ -137,7 +142,7 @@ class HeatMap(object):
                     dr.point((x, y), fill=color)
 
 
-    def heatmap(self, save_as):
+    def heatmap(self, save_as=None, base=None):
         u"""绘制热图"""
 
         self.__mkImg()
@@ -154,8 +159,11 @@ class HeatMap(object):
 
         self.__paintHeat(heat_data, cf.mkColors())
 
-        self.save_as = save_as
-        self.__save()
+        if save_as:
+            self.save_as = save_as
+            self.__save()
+
+        return self.__im
 
 
     def __save(self):
