@@ -5,6 +5,7 @@
 # email: oldj.wu@gmail.com
 #
 
+
 def getMaxSize(data):
     max_w = 0
     max_h = 0
@@ -39,7 +40,7 @@ def mkCircle(r, w):
             (-iy, ix),
             (iy, -ix),
             (-iy, -ix),
-            )
+        )
         for x2, y2 in ps:
             p = w * y2 + x2
             __tmp.setdefault(p, v)

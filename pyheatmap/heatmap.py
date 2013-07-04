@@ -12,12 +12,14 @@ pyHeatMap
 """
 
 import os
+import random
 import Image
 import ImageDraw2
 from inc import cf
 
 
 class HeatMap(object):
+
     def __init__(self,
                  data,
                  base=None,
@@ -32,6 +34,7 @@ class HeatMap(object):
         assert type(height) in (int, long, float)
         assert width >= 0 and height >= 0
 
+        count = 0
         data2 = []
         for hit in data:
             if len(hit) == 3:
@@ -42,8 +45,10 @@ class HeatMap(object):
                 raise Exception(u"length of hit is invalid!")
 
             data2.append((x, y, n))
+            count += n
 
         self.data = data2
+        self.count = count
         self.base = base
         self.width = width
         self.height = height
@@ -83,12 +88,13 @@ class HeatMap(object):
                 if 0 <= ix < width and 0 <= iy < height:
                     im.putpixel((ix, iy), color)
 
-    def clickmap(self, save_as=None, base=None, color=(255, 0, 0, 255)):
+    def clickmap(self, save_as=None, base=None, color=(255, 0, 0, 255), data=None):
         u"""绘制点击图片"""
 
         self.__mkImg(base)
 
-        for hit in self.data:
+        data = data or self.data
+        for hit in data:
             x, y, n = hit
             if n == 0 or x < 0 or x >= self.width or y < 0 or y >= self.height:
                 continue
@@ -145,7 +151,39 @@ class HeatMap(object):
                 else:
                     dr.point((x, y), fill=color)
 
-    def heatmap(self, save_as=None, base=None):
+    def sample(self, max_count=None, rate=None):
+
+        count = self.count
+        if count == 0:
+            return self.data
+
+        if rate and 0 < rate < 1:
+            count = int(self.count * rate)
+        if max_count and count > max_count:
+            count = max_count
+
+        if count == 0 or count >= self.count:
+            return self.data
+
+        data = []
+        for x, y, n in self.data:
+            for i in xrange(n):
+                data.append((x, y))
+
+        sample = random.sample(data, count)
+        data = {}
+        for x, y in sample:
+            key = (x, y)
+            data[key] = data.get(key, 0) + 1
+
+        data2 = []
+        for key in data:
+            x, y = key
+            data2.append((x, y, data[key]))
+
+        return data2
+
+    def heatmap(self, save_as=None, base=None, data=None):
         u"""绘制热图"""
 
         self.__mkImg()
@@ -153,7 +191,9 @@ class HeatMap(object):
         circle = cf.mkCircle(10, self.width)
         heat_data = [0] * self.width * self.height
 
-        for hit in self.data:
+        data = data or self.data
+
+        for hit in data:
             x, y, n = hit
             if x < 0 or x >= self.width or y < 0 or y >= self.height:
                 continue
