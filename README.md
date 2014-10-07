@@ -6,39 +6,39 @@
  * Source: https://github.com/oldj/pyheatmap
 
 
-这是一个生成热图的小程序，基于 Python 和 PIL 开发。
+pyHeatMap is a Python library for painting heat maps. It depends on PIL.
 
 
-##程序截图：
+##Screenshots
 
-###点击图
+###hit map
 
-![点击图](https://raw.github.com/oldj/pyheatmap/master/examples/hit.png)
+![hit map](https://raw.github.com/oldj/pyheatmap/master/examples/hit.png)
 
-###热图
+###heat map
 
-![热图](https://raw.github.com/oldj/pyheatmap/master/examples/heat.png)
+![heat map](https://raw.github.com/oldj/pyheatmap/master/examples/heat.png)
 
 
-##安装：
+##Install
 
-###通过 pip 安装：
+###by pip:
 
     pip install pyheatmap
 
-###通过 easy_install 安装：
+###by easy_install:
 
     easy_install pyheatmap
 
 
-###通过源码安装：
+###from source code:
 
     git clone git://github.com/oldj/pyheatmap.git
     cd pyheatmap
     python setup.py install
 
 
-##使用示例：
+##Example:
 
     # -*- coding: utf-8 -*-
 
@@ -47,7 +47,7 @@
 
     def main():
 
-        # 下载测试数据
+        # download test data
         url = "https://raw.github.com/oldj/pyheatmap/master/examples/test_data.txt"
         sdata = urllib.urlopen(url).read().split("\n")
         data = []
@@ -58,7 +58,7 @@
             a = [int(i) for i in a]
             data.append(a)
 
-        # 开始绘制
+        # start painting
         hm = HeatMap(data)
         hm.clickmap(save_as="hit.png")
         hm.heatmap(save_as="heat.png")
@@ -67,14 +67,14 @@
         main()
 
 
-##版权及致谢：
+##Copyright
 
- 本程序完全免费，并基于 LGPL 协议开源。
+ This library is free and is provided under the LGPL open source license.
 
 
-##更新历史：
+##Update
 
- - 2012-09-03 建立本项目。
+ - 2012-09-03 Create.
 
 
 
