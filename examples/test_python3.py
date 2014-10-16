@@ -17,25 +17,11 @@ def main():
                 a = ln.split(",")
                 a = [int(i) for i in a]
                 data.append(a)
-    # print(data)
 
     hm = HeatMap(data)
     hm.clickmap(save_as="hit.png")
     hm.heatmap(save_as="heat.png")
 
-    '''
-    data = []
-    for ln in sdata:
-        a = ln.split(",")
-        if len(a) != 2:
-            continue
-        a = [int(i) for i in a]
-        data.append(a)
-
-    # start painting
-    hm = HeatMap(data)
-    hm.clickmap(save_as="hit.png")
-    hm.heatmap(save_as="heat.png")
-    '''
+    
 if __name__ == "__main__":
     main()
