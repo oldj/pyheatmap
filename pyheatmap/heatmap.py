@@ -30,8 +30,8 @@ class HeatMap(object):
 
         assert type(data) in (list, tuple)
         assert base is None or os.path.isfile(base)
-        assert type(width) in (int, long, float)
-        assert type(height) in (int, long, float)
+        assert type(width) in (int, int, float)
+        assert type(height) in (int, int, float)
         assert width >= 0 and height >= 0
 
         count = 0
@@ -146,7 +146,7 @@ class HeatMap(object):
                 color = colors[v]
                 alpha = int(rr.findall(color)[0])
                 if alpha > 50:
-                    al = 255 - 255 * (alpha - 50) / 50
+                    al = 255 - 255 * (alpha - 50) // 50
                     im.putpixel((x, y), (0, 0, 255, al))
                 else:
                     dr.point((x, y), fill=color)
