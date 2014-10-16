@@ -13,8 +13,8 @@ pyHeatMap
 
 import os
 import random
-import Image
-import ImageDraw2
+from PIL import Image
+from PIL import ImageDraw2
 from inc import cf
 
 
