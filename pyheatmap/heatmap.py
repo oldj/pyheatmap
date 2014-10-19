@@ -30,8 +30,7 @@ class HeatMap(object):
 
         assert type(data) in (list, tuple)
         assert base is None or os.path.isfile(base)
-        assert type(width) in (int, int, float)
-        assert type(height) in (int, int, float)
+        assert cf.is_num(width) and cf.is_num(height)
         assert width >= 0 and height >= 0
 
         count = 0

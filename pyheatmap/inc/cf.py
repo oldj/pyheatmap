@@ -86,3 +86,15 @@ def mkColors(n=240):
 
     return colors
 
+
+def is_num(v):
+    u"""判断是否为数字，兼容Py2/Py3"""
+
+    if type(v) in (int, float):
+        return True
+
+    if ("%d" % v).isdigit():
+        # 兼容Py2的long类型
+        return True
+
+    return False
