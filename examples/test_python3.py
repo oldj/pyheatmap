@@ -1,5 +1,5 @@
-__author__ = 'kevin'
 # -*- coding: utf-8 -*-
+__author__ = 'kevin'
 
 import urllib.request
 from pyheatmap.heatmap import HeatMap

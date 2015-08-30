@@ -19,13 +19,12 @@ from inc import cf
 
 
 class HeatMap(object):
-
     def __init__(self,
                  data,
                  base=None,
                  width=0,
                  height=0
-        ):
+                 ):
         u""""""
 
         assert type(data) in (list, tuple)
@@ -51,13 +50,14 @@ class HeatMap(object):
         self.base = base
         self.width = width
         self.height = height
+        self.save_as = None
 
         if not self.base and (self.width == 0 or self.height == 0):
-            w, h = cf.getMaxSize(data)
+            w, h = cf.get_max_size(data)
             self.width = self.width or w
             self.height = self.height or h
 
-    def __mkImg(self, base=None):
+    def __mk_img(self, base=None):
         u"""生成临时图片"""
 
         base = base or self.base
@@ -69,7 +69,7 @@ class HeatMap(object):
         else:
             self.__im = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
 
-    def __paintHit(self, x, y, color):
+    def __paint_hit(self, x, y, color):
         u"""绘制点击小叉图片"""
 
         im = self.__im
@@ -90,7 +90,7 @@ class HeatMap(object):
     def clickmap(self, save_as=None, base=None, color=(255, 0, 0, 255), data=None):
         u"""绘制点击图片"""
 
-        self.__mkImg(base)
+        self.__mk_img(base)
 
         data = data or self.data
         for hit in data:
@@ -98,7 +98,7 @@ class HeatMap(object):
             if n == 0 or x < 0 or x >= self.width or y < 0 or y >= self.height:
                 continue
 
-            self.__paintHit(x, y, color)
+            self.__paint_hit(x, y, color)
 
         if save_as:
             self.save_as = save_as
@@ -118,7 +118,7 @@ class HeatMap(object):
             if 0 <= p2 < l:
                 heat_data[p2] += iv * n
 
-    def __paintHeat(self, heat_data, colors):
+    def __paint_heat(self, heat_data, colors):
         u""""""
 
         import re
@@ -185,9 +185,9 @@ class HeatMap(object):
     def heatmap(self, save_as=None, base=None, data=None):
         u"""绘制热图"""
 
-        self.__mkImg()
+        self.__mk_img()
 
-        circle = cf.mkCircle(10, self.width)
+        circle = cf.mk_circle(10, self.width)
         heat_data = [0] * self.width * self.height
 
         data = data or self.data
@@ -199,7 +199,7 @@ class HeatMap(object):
 
             self.__heat(heat_data, x, y, n, circle)
 
-        self.__paintHeat(heat_data, cf.mkColors())
+        self.__paint_heat(heat_data, cf.mk_colors())
 
         if save_as:
             self.save_as = save_as
