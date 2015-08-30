@@ -52,7 +52,7 @@ def example1():
 
 
 def main():
-    # example1()
+    example1()
     example2()
 
 

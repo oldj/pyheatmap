@@ -11,6 +11,12 @@ pyHeatMap
 
 """
 
+import sys
+if sys.version > '3':
+    PY3 = True
+else:
+    PY3 = False
+
 import os
 import random
 from PIL import Image
@@ -63,7 +69,8 @@ class HeatMap(object):
         base = base or self.base
 
         if base:
-            self.__im = Image.open(base) if type(base) in (str, unicode) else base
+            str_type = (str,) if PY3 else (str, unicode)
+            self.__im = Image.open(base) if type(base) in str_type else base
             self.width, self.height = self.__im.size
 
         else:
@@ -138,7 +145,8 @@ class HeatMap(object):
         heat_data2 = [int(i * r) - 1 for i in heat_data]
 
         size = width * height
-        for p in xrange(size):
+        _range = range if PY3 else xrange
+        for p in _range(size):
             v = heat_data2[p]
             if v > 0:
                 x, y = p % width, p // width
