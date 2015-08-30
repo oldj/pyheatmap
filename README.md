@@ -6,7 +6,8 @@
  * Source: https://github.com/oldj/pyheatmap
 
 
-pyHeatMap is a Python library for painting heat maps. It depends on PIL.
+pyHeatMap is a Python library for painting heat maps. It depends on [Pillow](https://python-pillow.github.io/).
+Python 2/3 compatible.
 
 
 ##Screenshots
@@ -74,6 +75,7 @@ pyHeatMap is a Python library for painting heat maps. It depends on PIL.
 
 ##Update
 
+ - 2015-08-31 Python 2/3 compatible.
  - 2012-09-03 Create.
 
 

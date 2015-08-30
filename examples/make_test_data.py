@@ -7,6 +7,7 @@
 
 import random
 
+
 def main():
 
     width = 400
