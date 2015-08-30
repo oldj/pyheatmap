@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name="pyheatmap",
-    version="0.1.8",
+    version="0.1.9",
     packages=["pyheatmap", "pyheatmap.inc"],
     url="https://github.com/oldj/pyheatmap",
     license="LGPL",
