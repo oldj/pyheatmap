@@ -11,5 +11,5 @@ setup(
     author="oldj",
     author_email="oldj.wu@gmail.com",
     description="Create heatmap by Python.",
-    requires=["PIL"]
+    requires=["pillow"]
 )
