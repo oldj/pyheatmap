@@ -4,10 +4,10 @@ from distutils.core import setup
 
 setup(
     name="pyheatmap",
-    version="0.1.9",
+    version="0.1.10",
     packages=["pyheatmap", "pyheatmap.inc"],
     url="https://github.com/oldj/pyheatmap",
-    license="LGPL",
+    license="MIT",
     author="oldj",
     author_email="oldj.wu@gmail.com",
     description="Create heatmap by Python.",
