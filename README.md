@@ -1,4 +1,4 @@
-#pyHeatMap
+# pyHeatMap
 
  * Author: oldj
  * Email: oldj.wu@gmail.com
@@ -10,70 +10,72 @@ pyHeatMap is a Python library for painting heat maps. It depends on [Pillow](htt
 Python 2/3 compatible.
 
 
-##Screenshots
+## Screenshots
 
-###hit map
+### hit map
 
 ![hit map](https://raw.github.com/oldj/pyheatmap/master/examples/hit.png)
 
-###heat map
+### heat map
 
 ![heat map](https://raw.github.com/oldj/pyheatmap/master/examples/heat.png)
 
 
-##Install
+## Install
 
-###by pip:
+### by pip:
 
     pip install pyheatmap
 
-###by easy_install:
+### by easy_install:
 
     easy_install pyheatmap
 
 
-###from source code:
+### from source code:
 
     git clone git://github.com/oldj/pyheatmap.git
     cd pyheatmap
     python setup.py install
 
 
-##Example:
+## Example:
 
-    # -*- coding: utf-8 -*-
+```python
+# -*- coding: utf-8 -*-
 
-    import urllib
-    from pyheatmap.heatmap import HeatMap
+from pyheatmap.heatmap import HeatMap
+import requests
 
-    def main():
+def main():
 
-        # download test data
-        url = "https://raw.github.com/oldj/pyheatmap/master/examples/test_data.txt"
-        sdata = urllib.urlopen(url).read().split("\n")
-        data = []
-        for ln in sdata:
-            a = ln.split(",")
-            if len(a) != 2:
-                continue
-            a = [int(i) for i in a]
-            data.append(a)
+    # download test data
+    url = "https://raw.github.com/oldj/pyheatmap/master/examples/test_data.txt"
+    sdata = requests.get(url).text.split("\n")
+    data = []
+    for ln in sdata:
+        a = ln.split(",")
+        if len(a) != 2:
+            continue
+        a = [int(i) for i in a]
+        data.append(a)
 
-        # start painting
-        hm = HeatMap(data)
-        hm.clickmap(save_as="hit.png")
-        hm.heatmap(save_as="heat.png")
+    # start painting
+    hm = HeatMap(data)
+    hm.clickmap(save_as="hit.png")
+    hm.heatmap(save_as="heat.png")
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
+
+```
+
+## Copyright
+
+ This library is free and is provided under the MIT open source license.
 
 
-##Copyright
-
- This library is free and is provided under the LGPL open source license.
-
-
-##Update
+## Update
 
  - 2015-08-31 Python 2/3 compatible.
  - 2012-09-03 Create.
