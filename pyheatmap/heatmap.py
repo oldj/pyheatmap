@@ -11,17 +11,17 @@ pyHeatMap
 
 """
 
+import os
+import random
+from PIL import Image
+from PIL import ImageDraw2
+from .inc import cf
+
 import sys
 if sys.version > '3':
     PY3 = True
 else:
     PY3 = False
-
-import os
-import random
-from PIL import Image
-from PIL import ImageDraw2
-from inc import cf
 
 
 class HeatMap(object):
@@ -173,8 +173,9 @@ class HeatMap(object):
             return self.data
 
         data = []
+        _range = range if PY3 else xrange
         for x, y, n in self.data:
-            for i in xrange(n):
+            for i in _range(n):
                 data.append((x, y))
 
         sample = random.sample(data, count)

@@ -30,14 +30,12 @@ pip-log.txt
 .iml
 .png
 
-.idea/inspectionProfiles/Project_Default.xml
 
 pyheatmap/*.png
 pyheatmap/build
 pyheatmap/env
 pyheatmap/dist
 
-*.iml
 
 pyheatmap/MANIFEST
 

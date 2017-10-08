@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 ## Copyright
 
- This library is free and is provided under the LGPL open source license.
+ This library is free and is provided under the MIT open source license.
 
 
 ## Update
@@ -86,7 +86,5 @@ if __name__ == "__main__":
  - 2015-08-31 Python 2/3 compatible.
  - 2012-09-03 Create.
 
-## License
 
-MIT
 
