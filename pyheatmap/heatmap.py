@@ -18,6 +18,7 @@ from PIL import ImageDraw2
 from .inc import cf
 
 import sys
+
 if sys.version > '3':
     PY3 = True
 else:
@@ -67,14 +68,14 @@ class HeatMap(object):
         u"""生成临时图片"""
 
         base = base or self.base
+        self.__im0 = None
 
         if base:
             str_type = (str,) if PY3 else (str, unicode)
-            self.__im = Image.open(base) if type(base) in str_type else base
-            self.width, self.height = self.__im.size
+            self.__im0 = Image.open(base) if type(base) in str_type else base
+            self.width, self.height = self.__im0.size
 
-        else:
-            self.__im = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
+        self.__im = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
 
     def __paint_hit(self, x, y, color):
         u"""绘制点击小叉图片"""
@@ -107,6 +108,7 @@ class HeatMap(object):
 
             self.__paint_hit(x, y, color)
 
+        self.__add_base()
         if save_as:
             self.save_as = save_as
             self.__save()
@@ -158,6 +160,13 @@ class HeatMap(object):
                 else:
                     dr.point((x, y), fill=color)
 
+    def __add_base(self):
+        if not self.__im0:
+            return
+
+        self.__im0.paste(self.__im, mask=self.__im)
+        self.__im = self.__im0
+
     def sample(self, max_count=None, rate=None):
 
         count = self.count
@@ -194,7 +203,7 @@ class HeatMap(object):
     def heatmap(self, save_as=None, base=None, data=None, r=10):
         u"""绘制热图"""
 
-        self.__mk_img()
+        self.__mk_img(base)
 
         circle = cf.mk_circle(r, self.width)
         heat_data = [0] * self.width * self.height
@@ -209,6 +218,7 @@ class HeatMap(object):
             self.__heat(heat_data, x, y, n, circle)
 
         self.__paint_heat(heat_data, cf.mk_colors())
+        self.__add_base()
 
         if save_as:
             self.save_as = save_as

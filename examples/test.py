@@ -7,6 +7,7 @@
 
 import os
 import sys
+
 module_path = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2])
 sys.path.append(module_path)
 sys.path.append(os.path.join(module_path, "pyheatmap"))
@@ -15,7 +16,6 @@ from pyheatmap.heatmap import HeatMap
 
 
 def load_data_from_file(fn):
-
     lines = open(fn).read().split("\n")
     data = []
     for ln in lines:
@@ -29,7 +29,6 @@ def load_data_from_file(fn):
 
 
 def example2():
-
     data_1 = load_data_from_file("test_data.txt")
     data_2 = load_data_from_file("test_data2.txt")
 
@@ -41,7 +40,6 @@ def example2():
 
 
 def example1():
-
     # 加载测试数据
     data = load_data_from_file("test_data.txt")
 
@@ -49,6 +47,7 @@ def example1():
     hm = HeatMap(data)
     hm.clickmap(save_as="hit.png")
     # hm.heatmap(save_as="heat.png", r=20) # 这儿可以传入 r 参数，指定热图半径，默认 r=10
+    # hm.heatmap(save_as="heat.png", base="/var/tmp/test_base.png")
     hm.heatmap(save_as="heat.png")
 
 
