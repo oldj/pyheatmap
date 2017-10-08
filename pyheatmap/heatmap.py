@@ -191,12 +191,12 @@ class HeatMap(object):
 
         return data2
 
-    def heatmap(self, save_as=None, base=None, data=None):
+    def heatmap(self, save_as=None, base=None, data=None, r=10):
         u"""绘制热图"""
 
         self.__mk_img()
 
-        circle = cf.mk_circle(10, self.width)
+        circle = cf.mk_circle(r, self.width)
         heat_data = [0] * self.width * self.height
 
         data = data or self.data

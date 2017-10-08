@@ -48,6 +48,7 @@ def example1():
     # 开始绘制
     hm = HeatMap(data)
     hm.clickmap(save_as="hit.png")
+    # hm.heatmap(save_as="heat.png", r=20) # 这儿可以传入 r 参数，指定热图半径，默认 r=10
     hm.heatmap(save_as="heat.png")
 
 
