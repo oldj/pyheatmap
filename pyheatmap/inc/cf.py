@@ -18,7 +18,7 @@ def get_max_size(data):
         if h > max_h:
             max_h = h
 
-    return max_w, max_h
+    return max_w + 1, max_h + 1
 
 
 def mk_circle(r, w):
